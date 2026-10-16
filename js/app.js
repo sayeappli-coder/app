@@ -1,13 +1,13 @@
-import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";var J="https://xtyysubdpapuxjlynapp.supabase.co",W="sb_publishable_EbYMxgSwQ4tL_JgBMhTTcg_jzjJruSq",P="BNl2SDYs--jYR3gFzPF-EArKvDthykX5F3CmWiSJLzadOsjrVYDd85peAe7vYoYHlnXAYcWj_zeRhTWWJszfiKs";var c=oe(J,W,{auth:{persistSession:!0,autoRefreshToken:!0,detectSessionInUrl:!1}}),B=document.getElementById("app"),D=document.getElementById("overlay"),H=document.getElementById("tabbar"),j=document.getElementById("toast"),X="0.6",Z="saye.prefs",U={sound:"court",vibrate:!0,flash:!0,sort:"standard",onboarded:!1};function le(){try{return{...U,...JSON.parse(localStorage.getItem(Z)||"{}")}}catch{return{...U}}}function L(){try{localStorage.setItem(Z,JSON.stringify(d))}catch{}}var d=le(),f=null,w=[],A={},q=null,Y={},ee={sport:"Sport",loisirs:"Loisirs",tv:"TV & Radio",commerce:"Commerce",divers:"Divers"},Q={fiable:{label:"Fiable",icon:"i-check"},a_confirmer:{label:"\xC0 confirmer",icon:null,mark:"!"},peu_fiable:{label:"Peu fiable",icon:null,mark:"\xD7"}},l=e=>String(e??"").replace(/[&<>"']/g,t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[t]),s=(e,t="")=>`<svg class="${t}"><use href="#${e}"/></svg>`;function o(e,t=2600){j.textContent=e,j.hidden=!1,clearTimeout(o.t),o.t=setTimeout(()=>{j.hidden=!0},t)}function S(e){location.hash=e}function y(e,t="history"){return`<div class="topbar">
-    <button class="back" data-back="${t}" aria-label="Retour">${s("i-back")}</button>
-    <h1>${l(e)}</h1>
-  </div>`}function F(e){let t=Q[e]||Q.a_confirmer;return`<span class="rel ${e}">${t.icon?s(t.icon):`<b>${t.mark}</b>`} ${t.label}</span>`}function ce(e,t){return`${location.href.split("#")[0]}#/join/${e.id}${t?`?c=${encodeURIComponent(t)}`:""}`}function I(e){let t=e?.message||String(e);return t.includes("bad_code")?"Ce lien d'invitation n'est pas valide.":t.includes("not_found")?"Cette alerte n'existe plus.":t.includes("not_member")?"Tu n'es pas membre de cette alerte.":t.includes("duplicate key")&&t.includes("pseudo")?"Ce pseudo est d\xE9j\xE0 pris.":"Oups, une erreur est survenue. R\xE9essaie."}var T=null,O=null;function te(e=d.sound,t=!1){if(ae(),e!=="aucun")try{T=T||new(window.AudioContext||window.webkitAudioContext);let a={court:[[880,.12],[0,.06],[880,.12],[0,.06],[1175,.3]],sirene:[[660,.35],[880,.35],[660,.35],[880,.35]],carillon:[[1047,.25],[784,.25],[659,.25],[523,.5]]},i=a[e]||a.court,n=()=>{let r=T.currentTime;for(let[v,b]of i){if(v){let $=T.createOscillator(),_=T.createGain();$.type=e==="sirene"?"sawtooth":"sine",$.frequency.value=v,_.gain.setValueAtTime(1e-4,r),_.gain.exponentialRampToValueAtTime(.35,r+.02),_.gain.exponentialRampToValueAtTime(1e-4,r+b),$.connect(_).connect(T.destination),$.start(r),$.stop(r+b)}r+=b}return i.reduce((v,[,b])=>v+b,0)},u=n();t&&(O=setInterval(n,(u+.6)*1e3))}catch{}}function ae(){clearInterval(O),O=null}function ie(){d.vibrate&&navigator.vibrate&&navigator.vibrate([400,150,400,150,800])}async function ue(){let{data:{session:e}}=await c.auth.getSession();if(e){let{error:a}=await c.auth.getUser();a&&(await c.auth.signOut({scope:"local"}),e=null)}if(!e){let{data:a,error:i}=await c.auth.signInAnonymously();if(i)throw i;e=a.session}let{data:t}=await c.from("profiles").select("pseudo").eq("id",e.user.id).maybeSingle();f={id:e.user.id,pseudo:t?.pseudo||null}}async function C(){let{data:e,error:t}=await c.rpc("my_alerts");if(t)throw t;return w=e||[],w}async function ne(e){if(!e||e===f.pseudo)return;let{error:t}=await c.from("profiles").upsert({id:f.id,pseudo:e});if(t)throw t;f.pseudo=e}var p={};p.splash=()=>(setTimeout(()=>{(location.hash==="#/splash"||location.hash==="")&&S(d.onboarded?"#/home":"#/intro")},1800),`<div class="splash">
-    ${s("i-bell")}
+import{createClient as ue}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";var W="https://xtyysubdpapuxjlynapp.supabase.co",H="sb_publishable_EbYMxgSwQ4tL_JgBMhTTcg_jzjJruSq",P="BNl2SDYs--jYR3gFzPF-EArKvDthykX5F3CmWiSJLzadOsjrVYDd85peAe7vYoYHlnXAYcWj_zeRhTWWJszfiKs";var l=ue(W,H,{auth:{persistSession:!0,autoRefreshToken:!0,detectSessionInUrl:!1}}),O=document.getElementById("app"),M=document.getElementById("overlay"),Q=document.getElementById("tabbar"),N=document.getElementById("toast"),ee="0.7",te="saye.prefs",U={sound:"court",vibrate:!0,flash:!0,sort:"standard",onboarded:!1};function de(){try{return{...U,...JSON.parse(localStorage.getItem(te)||"{}")}}catch{return{...U}}}function L(){try{localStorage.setItem(te,JSON.stringify(p))}catch{}}var p=de(),d=null,$=[],A={},x=null,Y={},ae={sport:"Sport",loisirs:"Loisirs",tv:"TV & Radio",commerce:"Commerce",divers:"Divers"},G={fiable:{label:"Fiable",icon:"i-check"},a_confirmer:{label:"\xC0 confirmer",icon:null,mark:"!"},peu_fiable:{label:"Peu fiable",icon:null,mark:"\xD7"}},c=e=>String(e??"").replace(/[&<>"']/g,t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[t]),r=(e,t="")=>`<svg class="${t}"><use href="#${e}"/></svg>`;function i(e,t=2600){N.textContent=e,N.hidden=!1,clearTimeout(i.t),i.t=setTimeout(()=>{N.hidden=!0},t)}function E(e){location.hash=e}function y(e,t="history"){return`<div class="topbar">
+    <button class="back" data-back="${t}" aria-label="Retour">${r("i-back")}</button>
+    <h1>${c(e)}</h1>
+  </div>`}function J(e){let t=G[e]||G.a_confirmer;return`<span class="rel ${e}">${t.icon?r(t.icon):`<b>${t.mark}</b>`} ${t.label}</span>`}function pe(e,t){return`${location.href.split("#")[0]}#/join/${e.id}${t?`?c=${encodeURIComponent(t)}`:""}`}function j(e){let t=e?.message||String(e);return t.includes("bad_code")?"Ce lien d'invitation n'est pas valide.":t.includes("not_found")?"Cette alerte n'existe plus.":t.includes("not_member")?"Tu n'es pas membre de cette alerte.":t.includes("duplicate key")&&t.includes("pseudo")?"Ce pseudo est d\xE9j\xE0 pris.":"Oups, une erreur est survenue. R\xE9essaie."}var C=null,V=null;function se(e=p.sound,t=!1){if(ne(),e!=="aucun")try{C=C||new(window.AudioContext||window.webkitAudioContext);let a={court:[[880,.12],[0,.06],[880,.12],[0,.06],[1175,.3]],sirene:[[660,.35],[880,.35],[660,.35],[880,.35]],carillon:[[1047,.25],[784,.25],[659,.25],[523,.5]]},s=a[e]||a.court,n=()=>{let o=C.currentTime;for(let[v,h]of s){if(v){let w=C.createOscillator(),_=C.createGain();w.type=e==="sirene"?"sawtooth":"sine",w.frequency.value=v,_.gain.setValueAtTime(1e-4,o),_.gain.exponentialRampToValueAtTime(.35,o+.02),_.gain.exponentialRampToValueAtTime(1e-4,o+h),w.connect(_).connect(C.destination),w.start(o),w.stop(o+h)}o+=h}return s.reduce((v,[,h])=>v+h,0)},u=n();t&&(V=setInterval(n,(u+.6)*1e3))}catch{}}function ne(){clearInterval(V),V=null}function ie(){p.vibrate&&navigator.vibrate&&navigator.vibrate([400,150,400,150,800])}async function me(){let{data:{session:e}}=await l.auth.getSession();if(e){let{error:t}=await l.auth.getUser();t&&(await l.auth.signOut({scope:"local"}),e=null)}if(!e){let{data:t,error:a}=await l.auth.signInAnonymously();if(a)throw a;e=t.session}d={id:e.user.id,pseudo:null,hasPassword:!1,canChangeAt:null},await re()}async function re(){let{data:e}=await l.rpc("my_account");e&&Object.assign(d,{pseudo:e.pseudo||null,hasPassword:!!e.has_password,canChangeAt:e.can_change_at})}async function q(){let{data:e,error:t}=await l.rpc("my_alerts");if(t)throw t;return $=e||[],$}var oe={longueur:"Le pseudo doit faire de 3 \xE0 24 caract\xE8res.",caracteres:"Pseudo : lettres, chiffres, point, tiret et tiret bas uniquement (pas d'espace).",lettre:"Le pseudo doit contenir au moins une lettre.",reserve:"Ce pseudo est r\xE9serv\xE9 (il ressemble \xE0 un compte officiel).",interdit:"Ce pseudo n'est pas autoris\xE9.",pris:"Ce pseudo est d\xE9j\xE0 pris (majuscules, accents et s\xE9parateurs ne comptent pas).",password:"Choisis un mot de passe d'au moins 8 caract\xE8res.",trop_tot:"Tu as chang\xE9 de pseudo il y a moins de 30 jours.",auth:"Session expir\xE9e, recharge l'application."};async function R(e,t){let{data:a,error:s}=await l.functions.invoke("pseudo",{body:{pseudo:e,password:t}});if(s){let n="serveur";try{n=(await s.context.json()).error||n}catch{}throw new Error(oe[n]||"Oups, une erreur est survenue. R\xE9essaie.")}return await re(),a}var X;function fe(e,t){clearTimeout(X);let a=e.value.trim();if(t){if(!a||a===d.pseudo){t.textContent="";return}X=setTimeout(async()=>{let{data:s}=await l.rpc("pseudo_problem",{p:a});e.value.trim()===a&&(t.textContent=s?oe[s]:"\u2713 Pseudo disponible",t.style.color=s?"var(--red)":"var(--green-dark)")},400)}}var be=e=>new Date(e).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}),m={};m.splash=()=>(setTimeout(()=>{(location.hash==="#/splash"||location.hash==="")&&E(p.onboarded?"#/home":"#/intro")},1800),`<div class="splash">
+    ${r("i-bell")}
     <div class="word">SAYE</div>
     <h2>\xAB \xC7a y est \xBB, c'est maintenant !</h2>
     <p>L'application communautaire qui te pr\xE9vient pile au bon moment, pour chaque \xE9v\xE9nement important pour toi ou ta communaut\xE9.</p>
-  </div>`);p.intro=()=>`
-  <div class="brand" style="margin-bottom:24px">${s("i-bell")}</div>
+  </div>`);m.intro=()=>`
+  <div class="brand" style="margin-bottom:24px">${r("i-bell")}</div>
   <h1>Simple et pratique</h1>
   <ol class="steps">
     <li><i>1</i><span>Tu cr\xE9es ton alerte et tu la partages avec tes proches.</span></li>
@@ -21,28 +21,28 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
   </div>
   <p style="font-size:18px">Tout ce que tu veux : demande \xE0 la communaut\xE9 !</p>
   <div class="grow"></div>
-  <button class="btn" data-action="start">Commencer</button>`;p.home=()=>`
+  <button class="btn" data-action="start">Commencer</button>`;m.home=()=>`
   <div class="brandbar">
-    <a class="brand" href="#/home">${s("i-bell")}<b>SAYE</b></a>
-    <button class="icon-btn" data-action="share-app" aria-label="Partager l'application">${s("i-share")}</button>
+    <a class="brand" href="#/home">${r("i-bell")}<b>SAYE</b></a>
+    <button class="icon-btn" data-action="share-app" aria-label="Partager l'application">${r("i-share")}</button>
   </div>
   <h1>Je souhaite\u2026</h1>
-  <a class="choice filled" href="#/create">${s("i-plus")}<div><strong>Cr\xE9er une nouvelle alerte</strong><span>Je la lance, puis je la partage</span></div></a>
-  <a class="choice" href="#/find">${s("i-search")}<div><strong>Choisir une alerte existante</strong><span>Je rejoins celles de la communaut\xE9</span></div></a>
-  ${w.length?`<a class="btn outline" href="#/alerts">Mes alertes (${w.length})</a>`:""}`;p.create=()=>`
+  <a class="choice filled" href="#/create">${r("i-plus")}<div><strong>Cr\xE9er une nouvelle alerte</strong><span>Je la lance, puis je la partage</span></div></a>
+  <a class="choice" href="#/find">${r("i-search")}<div><strong>Choisir une alerte existante</strong><span>Je rejoins celles de la communaut\xE9</span></div></a>
+  ${$.length?`<a class="btn outline" href="#/alerts">Mes alertes (${$.length})</a>`:""}`;m.create=()=>`
   ${y("Cr\xE9er une alerte")}
   <p style="font-weight:800;font-size:18px;margin-top:0">Qui pourra la rejoindre ?</p>
   <button class="choice filled stack" data-action="pick-visibility" data-v="public">
-    <div class="head">${s("i-globe")}<strong>Alerte publique</strong></div>
+    <div class="head">${r("i-globe")}<strong>Alerte publique</strong></div>
     <span>Visible par tout le monde. Plusieurs membres doivent confirmer (quorum). 100 % communautaire !</span>
   </button>
   <button class="choice stack" data-action="pick-visibility" data-v="private">
-    <div class="head">${s("i-lock")}<strong>Alerte priv\xE9e</strong></div>
+    <div class="head">${r("i-lock")}<strong>Alerte priv\xE9e</strong></div>
     <span>Un seul clic d'un membre pr\xE9vient tout le cercle. Je la partage uniquement avec les personnes que j'invite. Elles pourront inviter qui elles veulent : le Cercle VIP.</span>
   </button>
   <div class="note">Une alerte publique r\xE9guli\xE8re (\xE9mission, stream) n'est pas effac\xE9e. SAYE les contr\xF4le et peut les supprimer pour ne pas surcharger le serveur.</div>
   <div class="grow"></div>
-  <button class="link-btn" data-back="#/home">Annuler</button>`;p["create-form"]=()=>{if(!A.visibility)return setTimeout(()=>S("#/create")),"";let t=A.visibility==="public"?"quorum":"one";return`
+  <button class="link-btn" data-back="#/home">Annuler</button>`;m["create-form"]=()=>{if(!A.visibility)return setTimeout(()=>E("#/create")),"";let t=A.visibility==="public"?"quorum":"one";return`
   ${y("Nouvelle alerte","#/create")}
   <form id="create-form">
     <label class="field" for="f-title">Nom de l'alerte <small>(obligatoire)</small></label>
@@ -50,12 +50,18 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
 
     <label class="field" for="f-cat">Cat\xE9gorie</label>
     <select id="f-cat" name="category">
-      ${Object.entries(ee).map(([a,i])=>`<option value="${a}">${i}</option>`).join("")}
+      ${Object.entries(ae).map(([a,s])=>`<option value="${a}">${s}</option>`).join("")}
     </select>
 
+    ${d.pseudo?`
+    <label class="field">Pseudo</label>
+    <input type="text" value="${c(d.pseudo)}" readonly>`:`
     <label class="field" for="f-pseudo">Pseudo <small>(facultatif)</small></label>
-    <input id="f-pseudo" name="pseudo" type="text" maxlength="24" pattern="[A-Za-z0-9_\\-\\.]{2,24}" placeholder="Fred654" value="${l(f.pseudo||"")}" ${f.pseudo?"readonly":""}>
-    <p class="hint">Sans pseudo, tu restes anonyme.${f.pseudo?"":" Lettres, chiffres, point, tiret, 2 \xE0 24 caract\xE8res."}</p>
+    <input id="f-pseudo" name="pseudo" type="text" maxlength="24" placeholder="Fred654" autocomplete="username" data-live="f-pseudo-check">
+    <p id="f-pseudo-check" class="hint"></p>
+    <label class="field" for="f-pass">Mot de passe <small>(si pseudo)</small></label>
+    <input id="f-pass" name="password" type="password" minlength="8" autocomplete="new-password">
+    <p class="hint">Sans pseudo, tu restes anonyme. Avec un pseudo, le mot de passe ne peut pas \xEAtre r\xE9cup\xE9r\xE9 : note-le bien.</p>`}
 
     <label class="field">Qui peut la d\xE9clencher ?</label>
     <label class="radio"><input type="radio" name="trigger_mode" value="one" ${t==="one"?"checked":""}><div><b>Un seul membre suffit</b><small>Conseill\xE9 pour un cercle priv\xE9</small></div></label>
@@ -69,68 +75,68 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
     </select>
     <div class="spacer"></div>
     <button class="btn" type="submit">Valider mon alerte</button>
-  </form>`};p.share=async({id:e})=>{await C();let t=w.find(r=>r.id===e);if(!t)return`${y("Invite tes proches","#/alerts")}<p class="empty">Alerte introuvable.</p>`;let a=null;if(t.visibility==="private"){let{data:r}=await c.rpc("get_invite_code",{p_alert:e});if(a=r,!a)return`${y("Invite tes proches","#/alerts")}<p class="empty">Seul le cr\xE9ateur peut inviter sur cette alerte.</p>`}let i=ce(t,a),n=`SAYE : rejoins l'alerte \xAB ${t.title} \xBB pour \xEAtre pr\xE9venu pile au bon moment !`,u=encodeURIComponent(`${n} ${i}`);return`
+  </form>`};m.share=async({id:e})=>{await q();let t=$.find(o=>o.id===e);if(!t)return`${y("Invite tes proches","#/alerts")}<p class="empty">Alerte introuvable.</p>`;let a=null;if(t.visibility==="private"){let{data:o}=await l.rpc("get_invite_code",{p_alert:e});if(a=o,!a)return`${y("Invite tes proches","#/alerts")}<p class="empty">Seul le cr\xE9ateur peut inviter sur cette alerte.</p>`}let s=pe(t,a),n=`SAYE : rejoins l'alerte \xAB ${t.title} \xBB pour \xEAtre pr\xE9venu pile au bon moment !`,u=encodeURIComponent(`${n} ${s}`);return`
   ${y("Invite tes proches","#/alerts")}
   <p style="font-weight:800;font-size:18px;margin-top:0">Plus il y a de monde, plus l'alerte est efficace. Partage-la !</p>
-  <div class="pill-title">${s("i-bell-outline")}${l(t.title)}</div>
+  <div class="pill-title">${r("i-bell-outline")}${c(t.title)}</div>
   <div class="share-grid">
-    <button data-action="copy" data-url="${l(i)}">${s("i-link")}Copier le lien</button>
-    <a href="sms:?&body=${u}">${s("i-chat")}SMS</a>
-    <a href="https://wa.me/?text=${u}" target="_blank" rel="noopener">${s("i-chat")}WhatsApp</a>
-    <a href="https://signal.me/#p" data-action="copy-signal" data-url="${l(i)}">${s("i-chat")}Signal</a>
-    <a href="mailto:?subject=${encodeURIComponent("Alerte SAYE : "+t.title)}&body=${u}">${s("i-mail")}E-mail</a>
-    <button data-action="native-share" data-url="${l(i)}" data-text="${l(n)}">${s("i-dots")}Autres\u2026</button>
+    <button data-action="copy" data-url="${c(s)}">${r("i-link")}Copier le lien</button>
+    <a href="sms:?&body=${u}">${r("i-chat")}SMS</a>
+    <a href="https://wa.me/?text=${u}" target="_blank" rel="noopener">${r("i-chat")}WhatsApp</a>
+    <a href="https://signal.me/#p" data-action="copy-signal" data-url="${c(s)}">${r("i-chat")}Signal</a>
+    <a href="mailto:?subject=${encodeURIComponent("Alerte SAYE : "+t.title)}&body=${u}">${r("i-mail")}E-mail</a>
+    <button data-action="native-share" data-url="${c(s)}" data-text="${c(n)}">${r("i-dots")}Autres\u2026</button>
   </div>
   <div class="grow"></div>
-  <a class="btn outline" href="#/alerts">${A.justCreated?"Passer cette \xE9tape":"Retour \xE0 mes alertes"}</a>`};p.alerts=async()=>{await C();let e=de([...w]);if(!e.length)return`${y("Mes alertes","#/home")}
+  <a class="btn outline" href="#/alerts">${A.justCreated?"Passer cette \xE9tape":"Retour \xE0 mes alertes"}</a>`};m.alerts=async()=>{await q();let e=he([...$]);if(!e.length)return`${y("Mes alertes","#/home")}
       <p class="empty">Tu n'as encore aucune alerte.</p>
       <a class="btn" href="#/create">Cr\xE9er une alerte</a>
       <a class="btn outline" href="#/find">Trouver une alerte</a>`;let t=Date.now();return`
   ${y("Mes alertes","#/home")}
   <div class="banner">Reste sur cette page : tu es en veille</div>
   <div class="grid">
-    ${e.map(a=>{let i=a.cooldown_until&&new Date(a.cooldown_until).getTime()>t,n=a.trigger_mode!=="owner"||a.is_owner,u=n?a.trigger_mode==="quorum"?"Appuie quand tu le vois":"Appuie d\xE8s que \xE7a arrive":"Seul le cr\xE9ateur d\xE9clenche",r=a.visibility==="private"?`Priv\xE9e \xB7 ${a.trigger_mode==="quorum"?"quorum requis":a.trigger_mode==="owner"?"cr\xE9ateur seul":"1 clic suffit"}`:`Publique \xB7 ${a.trigger_mode==="quorum"?"quorum requis":a.trigger_mode==="owner"?"cr\xE9ateur seul":"1 clic suffit"}`;return`<div class="tile">
-        <button class="alarm-btn ${i?"cooldown":""}" data-action="press" data-id="${a.id}" ${n?"":"disabled"}>
-          ${s("i-bell")}<strong>${l(a.title)}</strong><span>${u}</span>
+    ${e.map(a=>{let s=a.cooldown_until&&new Date(a.cooldown_until).getTime()>t,n=a.trigger_mode!=="owner"||a.is_owner,u=n?a.trigger_mode==="quorum"?"Appuie quand tu le vois":"Appuie d\xE8s que \xE7a arrive":"Seul le cr\xE9ateur d\xE9clenche",o=a.visibility==="private"?`Priv\xE9e \xB7 ${a.trigger_mode==="quorum"?"quorum requis":a.trigger_mode==="owner"?"cr\xE9ateur seul":"1 clic suffit"}`:`Publique \xB7 ${a.trigger_mode==="quorum"?"quorum requis":a.trigger_mode==="owner"?"cr\xE9ateur seul":"1 clic suffit"}`;return`<div class="tile">
+        <button class="alarm-btn ${s?"cooldown":""}" data-action="press" data-id="${a.id}" ${n?"":"disabled"}>
+          ${r("i-bell")}<strong>${c(a.title)}</strong><span>${u}</span>
         </button>
         <div class="tile-actions">
-          ${a.can_invite?`<button data-action="open-share" data-id="${a.id}" aria-label="Partager">${s("i-share")}</button>`:""}
-          <button data-action="alert-menu" data-id="${a.id}" aria-label="Plus d'options">${s("i-dots")}</button>
+          ${a.can_invite?`<button data-action="open-share" data-id="${a.id}" aria-label="Partager">${r("i-share")}</button>`:""}
+          <button data-action="alert-menu" data-id="${a.id}" aria-label="Plus d'options">${r("i-dots")}</button>
         </div>
-        <div class="tile-meta">${r} \xB7 ${a.members_count} membre${a.members_count>1?"s":""}</div>
-        ${F(a.reliability)}
+        <div class="tile-meta">${o} \xB7 ${a.members_count} membre${a.members_count>1?"s":""}</div>
+        ${J(a.reliability)}
       </div>`}).join("")}
   </div>
   <p class="center" style="font-weight:800;font-size:18px;margin-top:28px">Absent ? La communaut\xE9 SAYE te pr\xE9viendra par notification.</p>
-  ${fe()}`};function de(e){return d.sort==="alpha"?e.sort((t,a)=>t.title.localeCompare(a.title,"fr")):d.sort==="recent"?e.sort((t,a)=>new Date(a.last_trigger_at||0)-new Date(t.last_trigger_at||0)):d.sort==="membres"&&e.sort((t,a)=>a.members_count-t.members_count),e}var pe=/iPad|iPhone|iPod/.test(navigator.userAgent)||navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1,me=matchMedia("(display-mode: standalone)").matches||navigator.standalone===!0;function fe(){return pe&&!me?`<div class="note info">${s("i-info")}<span>Sur iPhone, pour \xEAtre pr\xE9venu quand l'app est ferm\xE9e : touche Partager, puis \xAB Sur l'\xE9cran d'accueil \xBB, et ouvre SAYE depuis l'ic\xF4ne.</span></div>`:"Notification"in window?Notification.permission==="granted"?!m||m==="ok"?"":`<p class="hint center">${l(m)}</p><button class="btn outline small" data-action="fix-notif">R\xE9parer les notifications</button>`:Notification.permission==="denied"?'<p class="hint center">Les notifications sont bloqu\xE9es pour SAYE dans ton navigateur.</p>':'<button class="btn outline small" data-action="ask-notif">Activer les notifications</button>':""}var x={q:"",cat:""};p.find=async()=>{let{data:e,error:t}=await c.rpc("find_alerts",{p_query:x.q,p_category:x.cat||null});if(t)throw t;let a=e||[];return`
+  ${ye()}`};function he(e){return p.sort==="alpha"?e.sort((t,a)=>t.title.localeCompare(a.title,"fr")):p.sort==="recent"?e.sort((t,a)=>new Date(a.last_trigger_at||0)-new Date(t.last_trigger_at||0)):p.sort==="membres"&&e.sort((t,a)=>a.members_count-t.members_count),e}var ge=/iPad|iPhone|iPod/.test(navigator.userAgent)||navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1,ve=matchMedia("(display-mode: standalone)").matches||navigator.standalone===!0;function ye(){return ge&&!ve?`<div class="note info">${r("i-info")}<span>Sur iPhone, pour \xEAtre pr\xE9venu quand l'app est ferm\xE9e : touche Partager, puis \xAB Sur l'\xE9cran d'accueil \xBB, et ouvre SAYE depuis l'ic\xF4ne.</span></div>`:"Notification"in window?Notification.permission==="granted"?!b||b==="ok"?"":`<p class="hint center">${c(b)}</p><button class="btn outline small" data-action="fix-notif">R\xE9parer les notifications</button>`:Notification.permission==="denied"?'<p class="hint center">Les notifications sont bloqu\xE9es pour SAYE dans ton navigateur.</p>':'<button class="btn outline small" data-action="ask-notif">Activer les notifications</button>':""}var T={q:"",cat:""};m.find=async()=>{let{data:e,error:t}=await l.rpc("find_alerts",{p_query:T.q,p_category:T.cat||null});if(t)throw t;let a=e||[];return`
   ${y("Choisir une alerte","#/home")}
-  <div class="search">${s("i-search")}<input id="find-q" type="search" placeholder="Nom ou auteur de l'alerte" value="${l(x.q)}"></div>
+  <div class="search">${r("i-search")}<input id="find-q" type="search" placeholder="Nom ou auteur de l'alerte" value="${c(T.q)}"></div>
   <div class="row">
     <select id="find-cat"><option value="">Cat\xE9gorie : toutes</option>
-      ${Object.entries(ee).map(([i,n])=>`<option value="${i}" ${x.cat===i?"selected":""}>${n}</option>`).join("")}
+      ${Object.entries(ae).map(([s,n])=>`<option value="${s}" ${T.cat===s?"selected":""}>${n}</option>`).join("")}
     </select>
   </div>
   <div class="list">
-    ${a.length?a.map(i=>`
-      <button class="card" data-action="open-join" data-id="${i.id}">
+    ${a.length?a.map(s=>`
+      <button class="card" data-action="open-join" data-id="${s.id}">
         <div class="grow">
-          <small>Publique${i.is_member?" \xB7 d\xE9j\xE0 membre":""}</small>
-          <b>${l(i.title)}</b>
-          <span>par ${l(i.owner_pseudo||"Anonyme")} \xB7 ${i.members_count} membre${i.members_count>1?"s":""}</span>
+          <small>Publique${s.is_member?" \xB7 d\xE9j\xE0 membre":""}</small>
+          <b>${c(s.title)}</b>
+          <span>par ${c(s.owner_pseudo||"Anonyme")} \xB7 ${s.members_count} membre${s.members_count>1?"s":""}</span>
         </div>
-        ${F(i.reliability)}
+        ${J(s.reliability)}
       </button>`).join(""):'<p class="empty">Aucune alerte publique ne correspond.</p>'}
   </div>
-  <a class="btn" href="#/create">Cr\xE9er une alerte</a>`};p.join=async({id:e,query:t})=>{let a=t.get("c"),{data:i,error:n}=await c.rpc("get_alert_preview",{p_alert:e,p_code:a});return n||!i?`${y("Rejoindre","#/home")}<p class="empty">Ce lien n'est pas valide ou l'alerte n'existe plus.</p>`:`
+  <a class="btn" href="#/create">Cr\xE9er une alerte</a>`};m.join=async({id:e,query:t})=>{let a=t.get("c"),{data:s,error:n}=await l.rpc("get_alert_preview",{p_alert:e,p_code:a});return n||!s?`${y("Rejoindre","#/home")}<p class="empty">Ce lien n'est pas valide ou l'alerte n'existe plus.</p>`:`
   ${y("Rejoindre une alerte","#/home")}
-  <div class="pill-title">${s(i.visibility==="private"?"i-lock":"i-globe")}${l(i.title)}</div>
+  <div class="pill-title">${r(s.visibility==="private"?"i-lock":"i-globe")}${c(s.title)}</div>
   <p style="font-size:18px">
-    ${i.visibility==="private"?"Alerte priv\xE9e, sur invitation":"Alerte publique"} \xB7
-    cr\xE9\xE9e par <b>${l(i.owner_pseudo||"Anonyme")}</b> \xB7 ${i.members_count} membre${i.members_count>1?"s":""}
+    ${s.visibility==="private"?"Alerte priv\xE9e, sur invitation":"Alerte publique"} \xB7
+    cr\xE9\xE9e par <b>${c(s.owner_pseudo||"Anonyme")}</b> \xB7 ${s.members_count} membre${s.members_count>1?"s":""}
   </p>
-  ${F(i.reliability)}
+  ${J(s.reliability)}
   <div class="grow"></div>
-  ${i.is_member?'<a class="btn" href="#/alerts">D\xE9j\xE0 membre : voir mes alertes</a>':`<button class="btn" data-action="join" data-id="${i.id}" data-code="${l(a||"")}">Je veux \xEAtre pr\xE9venu</button>`}`};p.alarm=async({id:e})=>(setTimeout(()=>ge(Number(e))),p.alerts());p.quorum=async({id:e})=>(setTimeout(()=>re(e)),p.alerts());p.settings=()=>`
+  ${s.is_member?'<a class="btn" href="#/alerts">D\xE9j\xE0 membre : voir mes alertes</a>':`<button class="btn" data-action="join" data-id="${s.id}" data-code="${c(a||"")}">Je veux \xEAtre pr\xE9venu</button>`}`};m.alarm=async({id:e})=>(setTimeout(()=>Se(Number(e))),m.alerts());m.quorum=async({id:e})=>(setTimeout(()=>ce(e)),m.alerts());m.settings=()=>`
   ${y("R\xE9glages","#/home")}
   <label class="field" for="s-sound">Son de l'alerte</label>
   <select id="s-sound" data-pref="sound">
@@ -139,8 +145,8 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
     <option value="carillon">Carillon</option>
     <option value="aucun">Aucun son</option>
   </select>
-  <label class="check"><input type="checkbox" data-pref="vibrate" ${d.vibrate?"checked":""}> Vibreur</label>
-  <label class="check"><input type="checkbox" data-pref="flash" ${d.flash?"checked":""}> Flash de l'\xE9cran</label>
+  <label class="check"><input type="checkbox" data-pref="vibrate" ${p.vibrate?"checked":""}> Vibreur</label>
+  <label class="check"><input type="checkbox" data-pref="flash" ${p.flash?"checked":""}> Flash de l'\xE9cran</label>
   <button class="btn outline" data-action="test-alarm">Tester mon alerte</button>
 
   <label class="field" for="s-sort">Trier mes alertes par</label>
@@ -152,26 +158,52 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
   </select>
 
   <label class="field">Notifications sur cet appareil</label>
-  <p id="notif-status" class="muted" style="font-weight:700;margin:0 0 10px">${m==="ok"?"Notifications actives sur cet appareil \u2713":l(m||"V\xE9rification\u2026")}</p>
+  <p id="notif-status" class="muted" style="font-weight:700;margin:0 0 10px">${b==="ok"?"Notifications actives sur cet appareil \u2713":c(b||"V\xE9rification\u2026")}</p>
   <button class="btn outline small" data-action="fix-notif">Activer / r\xE9parer les notifications</button>
   <button class="link-btn" data-action="diag-notif">Diagnostic des notifications</button>
   <pre id="diag" style="white-space:pre-wrap;font-size:13px;margin:0"></pre>
 
-  <label class="field" for="s-pseudo">Mon pseudo</label>
-  <div class="row">
-    <input id="s-pseudo" type="text" maxlength="24" placeholder="Anonyme" value="${l(f.pseudo||"")}">
-    <button class="btn small" style="flex:0 0 auto;width:auto" data-action="save-pseudo">OK</button>
-  </div>
+  ${we()}
 
   <div class="spacer"></div>
-  <div class="note info">${s("i-info")}<span>Conseil : appuie seulement \xE0 la reprise du programme, pas pour une bande-annonce, la m\xE9t\xE9o ou le tirage du loto.</span></div>
+  <div class="note info">${r("i-info")}<span>Conseil : appuie seulement \xE0 la reprise du programme, pas pour une bande-annonce, la m\xE9t\xE9o ou le tirage du loto.</span></div>
   <p class="muted" style="font-weight:700">Une alerte est supprim\xE9e si personne ne s'y est connect\xE9 depuis plus de 24 heures.</p>
   <div class="row">
     <button class="btn small" data-action="share-app">Partager l'application</button>
     <a class="btn small outline" href="#/legal">Mentions l\xE9gales</a>
   </div>
   <button class="link-btn center" data-action="reset-prefs">Effacer mes pr\xE9f\xE9rences</button>
-  <p class="muted center" style="font-size:13px;font-weight:700">Version ${X}</p>`;p.legal=()=>`
+  <p class="muted center" style="font-size:13px;font-weight:700">Version ${ee}</p>`;function we(){let e=`
+    <details style="margin-top:12px">
+      <summary style="font-weight:800;cursor:pointer">J'ai d\xE9j\xE0 un pseudo (autre t\xE9l\xE9phone)</summary>
+      <input id="l-pseudo" type="text" maxlength="24" placeholder="Mon pseudo" autocomplete="username" style="margin-top:10px">
+      <input id="l-pass" type="password" placeholder="Mot de passe" autocomplete="current-password" style="margin-top:8px">
+      <p class="hint">Les alertes rejointes sur ce t\xE9l\xE9phone sans pseudo ne seront pas reprises.</p>
+      <button class="btn small" data-action="login-pseudo">Me connecter</button>
+    </details>`;if(!d.pseudo)return`
+  <label class="field" for="s-pseudo">Mon pseudo</label>
+  <p class="muted" style="margin:0 0 8px;font-weight:700">Tu es anonyme. R\xE9serve un pseudo pour \xEAtre reconnu et le retrouver sur un autre t\xE9l\xE9phone.</p>
+  <input id="s-pseudo" type="text" maxlength="24" placeholder="Fred654" autocomplete="username" data-live="s-pseudo-check">
+  <p id="s-pseudo-check" class="hint"></p>
+  <input id="s-pass" type="password" minlength="8" placeholder="Mot de passe (8 caract\xE8res min.)" autocomplete="new-password" style="margin-top:8px">
+  <p class="hint">Le mot de passe ne peut pas \xEAtre r\xE9cup\xE9r\xE9 : note-le bien.</p>
+  <button class="btn small" data-action="claim-pseudo">R\xE9server mon pseudo</button>
+  ${e}`;if(!d.hasPassword)return`
+  <label class="field">Mon pseudo : ${c(d.pseudo)}</label>
+  <p class="hint" style="color:var(--orange)">Ton pseudo n'est pas encore prot\xE9g\xE9. Ajoute un mot de passe pour le garder et le retrouver sur un autre t\xE9l\xE9phone.</p>
+  <input id="s-pass" type="password" minlength="8" placeholder="Mot de passe (8 caract\xE8res min.)" autocomplete="new-password" style="margin-top:8px">
+  <button class="btn small" data-action="protect-pseudo">Prot\xE9ger mon pseudo</button>`;let t=!d.canChangeAt||new Date(d.canChangeAt)<=new Date;return`
+  <label class="field">Mon pseudo : ${c(d.pseudo)} \u2713</label>
+  <p class="muted" style="margin:0;font-weight:700">Prot\xE9g\xE9 par ton mot de passe.</p>
+  ${t?`
+  <details style="margin-top:10px">
+    <summary style="font-weight:800;cursor:pointer">Changer de pseudo</summary>
+    <input id="s-pseudo" type="text" maxlength="24" placeholder="Nouveau pseudo" data-live="s-pseudo-check" style="margin-top:10px">
+    <p id="s-pseudo-check" class="hint"></p>
+    <p class="hint">Ensuite, plus de changement possible pendant 30 jours.</p>
+    <button class="btn small" data-action="change-pseudo">Changer</button>
+  </details>`:`<p class="hint">Prochain changement de pseudo possible le ${be(d.canChangeAt)}.</p>`}
+  ${e}`}m.legal=()=>`
   ${y("Mentions l\xE9gales","#/settings")}
   <div class="legal">
     <section><h3>\xC9diteur</h3><p>[NOM ET PR\xC9NOM], [SIRET], [E-MAIL DE CONTACT]</p></section>
@@ -180,36 +212,36 @@ import{createClient as oe}from"https://cdn.jsdelivr.net/npm/@supabase/supabase-j
     <section><h3>Propri\xE9t\xE9 intellectuelle</h3><p>Le nom SAYE est d\xE9pos\xE9. [V\xC9RIFIER L'ENREGISTREMENT \xC0 L'INPI]</p></section>
     <section><h3>Conditions g\xE9n\xE9rales (CGU)</h3><p>[\xC0 R\xC9DIGER : r\xE8gles d'usage, mod\xE9ration des alertes publiques]</p></section>
     <section><h3>S\xE9curit\xE9</h3><p>SAYE ne remplace ni FR-Alert ni le 112 et ne doit pas servir \xE0 des alertes de s\xE9curit\xE9.</p></section>
-  </div>`;function K({trigger:e,alert:t,test:a=!1}){q={triggerId:e?.id,alertId:t?.id,test:a};let i=t?`${t.visibility==="private"?"Cercle priv\xE9":"Alerte publique"} \xB7 ${t.members_count} membre${t.members_count>1?"s":""}`:"";D.innerHTML=`
-    <div class="full alarm ${d.flash?"flash":""}" role="alertdialog" aria-live="assertive">
+  </div>`;function K({trigger:e,alert:t,test:a=!1}){x={triggerId:e?.id,alertId:t?.id,test:a};let s=t?`${t.visibility==="private"?"Cercle priv\xE9":"Alerte publique"} \xB7 ${t.members_count} membre${t.members_count>1?"s":""}`:"";M.innerHTML=`
+    <div class="full alarm ${p.flash?"flash":""}" role="alertdialog" aria-live="assertive">
       <div class="kicker">ALERTE !</div>
-      ${s("i-bell","big")}
-      <h2>${l(t?.title||"Test de ton alerte")}</h2>
-      <div class="by">${a?"Voil\xE0 ce que tu verras":`d\xE9clench\xE9e par ${l(e?.pseudo||"un membre")}`}</div>
-      <p style="font-weight:800">${l(i)}</p>
-      ${e?.comment?`<p style="font-size:19px">\xAB ${l(e.comment)} \xBB</p>`:""}
+      ${r("i-bell","big")}
+      <h2>${c(t?.title||"Test de ton alerte")}</h2>
+      <div class="by">${a?"Voil\xE0 ce que tu verras":`d\xE9clench\xE9e par ${c(e?.pseudo||"un membre")}`}</div>
+      <p style="font-weight:800">${c(s)}</p>
+      ${e?.comment?`<p style="font-size:19px">\xAB ${c(e.comment)} \xBB</p>`:""}
       <button class="btn" data-action="stop-alarm">Arr\xEAter l'alerte</button>
       ${a?"":'<button class="link-btn" data-action="report">Fausse alerte ? Signaler</button>'}
-    </div>`,te(d.sound,!0),ie()}function h(){ae(),navigator.vibrate&&navigator.vibrate(0),D.innerHTML="",q=null,clearInterval(h.timer)}function be(e,t){let a=5;D.innerHTML=`
+    </div>`,se(p.sound,!0),ie()}function g(){ne(),navigator.vibrate&&navigator.vibrate(0),M.innerHTML="",x=null,clearInterval(g.timer)}function $e(e,t){let a=5;M.innerHTML=`
     <div class="full">
-      ${s("i-bell","mid")}
+      ${r("i-bell","mid")}
       <h1>Merci !</h1>
       <p class="lead">La communaut\xE9 SAYE te remercie pour ta participation.</p>
       <p class="sub">Alerte envoy\xE9e \xE0 ${e.members} membre${e.members>1?"s":""}. Les clics suivants sont ignor\xE9s pendant 60 s.</p>
       <button class="btn" data-action="close-overlay">Retour \xE0 mes alertes</button>
       <button class="btn outline small" data-action="cancel-trigger" data-id="${e.trigger_id}" id="undo">Clic par erreur ? Annuler (${a} s)</button>
-    </div>`,h.timer=setInterval(()=>{a-=1;let i=document.getElementById("undo");if(!i)return clearInterval(h.timer);a<=0?(i.remove(),clearInterval(h.timer)):i.textContent=`Clic par erreur ? Annuler (${a} s)`},1e3)}async function se(e,{count:t,quorum:a,window_s:i,firstPseudo:n,since:u}){let r=Y[e.id]&&Date.now()-Y[e.id]<i*1e3,v=(u?new Date(u).getTime():Date.now())+i*1e3,b=Math.max(0,t-1);D.innerHTML=`
+    </div>`,g.timer=setInterval(()=>{a-=1;let s=document.getElementById("undo");if(!s)return clearInterval(g.timer);a<=0?(s.remove(),clearInterval(g.timer)):s.textContent=`Clic par erreur ? Annuler (${a} s)`},1e3)}async function le(e,{count:t,quorum:a,window_s:s,firstPseudo:n,since:u}){let o=Y[e.id]&&Date.now()-Y[e.id]<s*1e3,v=(u?new Date(u).getTime():Date.now())+s*1e3,h=Math.max(0,t-1);M.innerHTML=`
     <div class="full">
-      ${s("i-bell","mid")}
-      <h1 style="font-size:32px">${r?"Signal envoy\xE9":"Des membres ont signal\xE9"}</h1>
-      <p class="lead">${l(e.title)}</p>
-      <p style="font-size:19px;font-weight:700">${r?"On attend la confirmation des autres membres.":`${l(n||"Un membre")}${b?` et ${b} autre${b>1?"s":""} membre${b>1?"s":""} ont appuy\xE9`:" a appuy\xE9"}. Tu le vois aussi ?`}</p>
+      ${r("i-bell","mid")}
+      <h1 style="font-size:32px">${o?"Signal envoy\xE9":"Des membres ont signal\xE9"}</h1>
+      <p class="lead">${c(e.title)}</p>
+      <p style="font-size:19px;font-weight:700">${o?"On attend la confirmation des autres membres.":`${c(n||"Un membre")}${h?` et ${h} autre${h>1?"s":""} membre${h>1?"s":""} ont appuy\xE9`:" a appuy\xE9"}. Tu le vois aussi ?`}</p>
       <div class="progress"><div style="width:${Math.min(100,t/a*100)}%"></div></div>
       <p class="sub">${t} confirmation${t>1?"s":""} sur ${a} n\xE9cessaire${a>1?"s":""}</p>
       <p class="muted" style="font-weight:700" id="q-left"></p>
       <div style="height:40px"></div>
-      ${r?"":`<button class="btn" data-action="press" data-id="${e.id}">Je confirme</button>`}
-      <button class="btn outline" data-action="close-overlay">${r?"Fermer":"Pas encore"}</button>
+      ${o?"":`<button class="btn" data-action="press" data-id="${e.id}">Je confirme</button>`}
+      <button class="btn outline" data-action="close-overlay">${o?"Fermer":"Pas encore"}</button>
       <p class="muted" style="font-weight:700">\xC0 ${a} confirmations, l'alerte sonne pour tout le monde.</p>
-    </div>`,clearInterval(h.timer);let $=()=>{let _=Math.ceil((v-Date.now())/1e3),E=document.getElementById("q-left");if(!E)return clearInterval(h.timer);if(_<=0){h();return}E.textContent=`Encore ${_} seconde${_>1?"s":""} pour confirmer`};$(),h.timer=setInterval($,500)}async function he(e){let t=w.find(n=>n.id===e),{data:a,error:i}=await c.rpc("press_alert",{p_alert:e});if(i)return o(I(i));if(a.status==="cooldown")return o("D\xE9j\xE0 d\xE9clench\xE9e il y a moins de 60 s.");if(a.status==="forbidden")return o("Seul le cr\xE9ateur peut d\xE9clencher cette alerte.");if(a.status==="triggered"){be(a,t),g();return}a.status==="pending"&&(Y[e]=Date.now(),se(t,{count:a.count,quorum:a.quorum,window_s:a.window_s,firstPseudo:f.pseudo}))}var V={start(){d.onboarded=!0,L(),S("#/home")},"pick-visibility"(e){A={visibility:e.dataset.v},S("#/create-form")},press(e){he(e.dataset.id)},"open-share"(e){A.justCreated=!1,S(`#/share/${e.dataset.id}`)},"open-join"(e){S(`#/join/${e.dataset.id}`)},async join(e){let t=N(),{error:a}=await c.rpc("join_alert",{p_alert:e.dataset.id,p_code:e.dataset.code||null});if(a)return o(I(a));o("Tu seras pr\xE9venu !"),await t,await k(),S("#/alerts")},async"diag-notif"(){let e=document.getElementById("diag"),t=a=>{e.textContent+=`${a}
-`};e.textContent="";try{t(`Version ${X} \xB7 permission : ${Notification.permission}`);let a=await navigator.serviceWorker.ready;t(`Service worker : ${a.active?"actif":"inactif"} \xB7 port\xE9e ${new URL(a.scope).pathname}`);let i=await a.pushManager.getSubscription();t(`Abonnement existant : ${i?"oui":"non"}`),i&&(await i.unsubscribe(),t("\u2192 supprim\xE9"));let n=async($,_)=>{try{let E=await a.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:_});return t(`${$} : OK (${new URL(E.endpoint).host})`),E}catch(E){return t(`${$} : \xC9CHEC ${E.name} ${E.message}`),null}};if(await n("Cl\xE9 SAYE",z(P))){await k(),t(`Enregistrement serveur : ${m}`);return}let r=await crypto.subtle.generateKey({name:"ECDH",namedCurve:"P-256"},!0,["deriveBits"]),v=new Uint8Array(await crypto.subtle.exportKey("raw",r.publicKey)),b=await n("Cl\xE9 de test neuve",v);b&&await b.unsubscribe()}catch(a){t(`Erreur : ${a.name} ${a.message}`)}},async"fix-notif"(){let e=document.getElementById("notif-status");e&&(e.textContent="Inscription en cours\u2026"),await N(),await k(),e&&(e.textContent=m==="ok"?"Notifications actives sur cet appareil \u2713":m),m==="ok"&&o("Notifications activ\xE9es !")},async"alert-menu"(e){let t=w.find(u=>u.id===e.dataset.id);if(!t)return;let a=t.is_owner?`Supprimer l'alerte \xAB ${t.title} \xBB pour tout le monde ?`:`Quitter l'alerte \xAB ${t.title} \xBB ?`;if(!confirm(a))return;let i=t.is_owner?c.from("alerts").delete().eq("id",t.id):c.from("members").delete().eq("alert_id",t.id).eq("user_id",f.id),{error:n}=await i;if(n)return o(I(n));o(t.is_owner?"Alerte supprim\xE9e.":"Tu as quitt\xE9 cette alerte."),g()},async copy(e){try{await navigator.clipboard.writeText(e.dataset.url),o("Lien copi\xE9 !")}catch{prompt("Copie ce lien :",e.dataset.url)}},async"copy-signal"(e,t){t.preventDefault();try{await navigator.clipboard.writeText(e.dataset.url)}catch{}o("Lien copi\xE9 : colle-le dans Signal.")},async"native-share"(e){if(navigator.share)try{await navigator.share({title:"SAYE",text:e.dataset.text,url:e.dataset.url})}catch{}else V.copy(e)},async"share-app"(){let e=location.href.split("#")[0];if(navigator.share)try{await navigator.share({title:"SAYE",text:"SAYE : \xAB \xC7a y est \xBB, c'est maintenant !",url:e})}catch{}else try{await navigator.clipboard.writeText(e),o("Lien de l'application copi\xE9 !")}catch{prompt("Lien :",e)}},"stop-alarm"(){h()},"close-overlay"(){h(),g()},async"cancel-trigger"(e){let{data:t}=await c.rpc("cancel_trigger",{p_trigger:Number(e.dataset.id)});h(),o(t?"Alerte annul\xE9e.":"Trop tard pour annuler."),g()},async report(){q?.triggerId&&await c.rpc("report_trigger",{p_trigger:q.triggerId}),h(),o("Merci, signalement enregistr\xE9.")},"test-alarm"(){K({test:!0})},async"save-pseudo"(){let e=document.getElementById("s-pseudo").value.trim();if(!/^[A-Za-z0-9_.-]{2,24}$/.test(e))return o("Pseudo : 2 \xE0 24 lettres, chiffres, point ou tiret.");try{await ne(e),o("Pseudo enregistr\xE9.")}catch(t){o(I(t))}},"reset-prefs"(){confirm("Effacer tes pr\xE9f\xE9rences sur cet appareil ?")&&(d={...U,onboarded:!0},L(),g(),o("Pr\xE9f\xE9rences effac\xE9es."))},"ask-notif"(){$e()}};document.addEventListener("click",e=>{let t=e.target.closest("[data-back]");if(t){e.preventDefault();let i=t.dataset.back;i==="history"&&history.length>1?history.back():S(i==="history"?"#/home":i);return}let a=e.target.closest("[data-action]");a&&V[a.dataset.action]&&(a.tagName==="BUTTON"&&e.preventDefault(),V[a.dataset.action](a,e))});document.addEventListener("change",e=>{let t=e.target;t.dataset.pref&&(d[t.dataset.pref]=t.type==="checkbox"?t.checked:t.value,L(),t.dataset.pref==="sound"&&te(t.value)),t.id==="find-cat"&&(x.cat=t.value,g())});var G;document.addEventListener("input",e=>{e.target.id==="find-q"&&(clearTimeout(G),G=setTimeout(()=>{x.q=e.target.value.trim(),g(!0)},350))});document.addEventListener("submit",async e=>{if(e.target.id!=="create-form")return;e.preventDefault();let t=new FormData(e.target),a=e.target.querySelector("button[type=submit]");a.disabled=!0;let i=N();try{let n=String(t.get("pseudo")||"").trim();n&&n!==f.pseudo&&await ne(n);let{data:u,error:r}=await c.from("alerts").insert({title:String(t.get("title")).trim(),category:t.get("category"),visibility:A.visibility,trigger_mode:t.get("trigger_mode"),invite_mode:t.get("invite_mode"),owner_pseudo:f.pseudo}).select("id").single();if(r)throw r;A={justCreated:!0},S(`#/share/${u.id}`),i.then(k)}catch(n){o(I(n)),a.disabled=!1}});function ve(){c.channel("saye").on("postgres_changes",{event:"INSERT",schema:"public",table:"triggers"},async({new:e})=>{if(e.cancelled||e.triggered_by===f.id)return;await C();let t=w.find(a=>a.id===e.alert_id);t&&(document.visibilityState==="hidden"&&ye(t,e),K({trigger:e,alert:t}),R.name==="alerts"&&g(!0))}).on("postgres_changes",{event:"UPDATE",schema:"public",table:"triggers"},({new:e})=>{e.cancelled&&q?.triggerId===e.id&&(h(),o("L'alerte a \xE9t\xE9 annul\xE9e par son auteur."))}).on("postgres_changes",{event:"INSERT",schema:"public",table:"presses"},({new:e})=>{e.user_id===f.id||q||re(e.alert_id).then(ie)}).subscribe()}async function re(e){await C();let t=w.find(u=>u.id===e);if(!t)return;let{data:a}=await c.from("presses").select("pseudo, created_at").eq("alert_id",e).order("created_at"),i=(a||[]).filter(u=>Date.now()-new Date(u.created_at).getTime()<3e4);if(!i.length)return o("Ce signalement est termin\xE9.");let n=Math.min(t.quorum,Math.max(t.members_count,1));se(t,{count:i.length,quorum:n,window_s:30,firstPseudo:i[0].pseudo,since:i[0].created_at})}async function ge(e){let{data:t}=await c.from("triggers").select("*").eq("id",e).maybeSingle();if(!t)return;if(t.cancelled)return o("Cette alerte a \xE9t\xE9 annul\xE9e par son auteur.");if(Date.now()-new Date(t.created_at).getTime()>10*60*1e3)return;await C();let a=w.find(i=>i.id===t.alert_id);a&&K({trigger:t,alert:a})}function z(e){let t=atob(e.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((e.length+3)%4));return Uint8Array.from(t,a=>a.charCodeAt(0))}var m="";async function k(){if(!("serviceWorker"in navigator)||!("PushManager"in window))return m="Ce navigateur ne g\xE8re pas les notifications push.";if(!("Notification"in window))return m="Notifications indisponibles sur ce navigateur.";if(Notification.permission==="denied")return m="Notifications bloqu\xE9es dans le navigateur.";if(Notification.permission!=="granted")return m="Notifications pas encore autoris\xE9es.";let e=t=>{let a=t.toJSON();return c.from("push_subscriptions").upsert({endpoint:a.endpoint,user_id:f.id,p256dh:a.keys.p256dh,auth:a.keys.auth})};try{let t=await navigator.serviceWorker.ready,a=await t.pushManager.getSubscription();a||(a=await t.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:z(P)}));let{error:i}=await e(a);if(i&&(await a.unsubscribe(),a=await t.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:z(P)}),{error:i}=await e(a)),i)throw new Error(`enregistrement : ${i.message}`);return m="ok"}catch(t){return console.warn("push",t),m=`\xC9chec de l'inscription : ${t?.name||""} ${t?.message||t}`.trim()}}function N(){return!("Notification"in window)||Notification.permission!=="default"?Promise.resolve(Notification?.permission):Notification.requestPermission()}async function ye(e,t){if(!("Notification"in window)||Notification.permission!=="granted")return;let a=await navigator.serviceWorker?.getRegistration(),i={body:`D\xE9clench\xE9e par ${t.pseudo||"un membre"}`,icon:"icons/icon-192.png",badge:"icons/icon-192.png",tag:`saye-${t.id}`,renotify:!0,vibrate:[400,150,400],data:{url:"#/alerts"}};a?a.showNotification(`ALERTE ! ${e.title}`,i):new Notification(`ALERTE ! ${e.title}`,i)}async function $e(){await N(),await k(),R.name==="alerts"&&g(!0)}var we={alarm:"alerts",quorum:"alerts",alerts:"alerts",find:"find",create:"create","create-form":"create",settings:"settings",legal:"settings",home:null,share:"alerts",join:"find"},R={name:"splash"},M=0;function _e(){let[e,t]=(location.hash.replace(/^#\/?/,"")||"splash").split("?"),[a,i]=e.split("/");return{name:p[a]?a:"home",id:i,query:new URLSearchParams(t||"")}}async function g(e=!1){let t=++M;R=_e();let a=R,i=!["splash","intro"].includes(a.name);H.hidden=!i,document.body.classList.toggle("no-tabbar",!i),H.querySelectorAll("a").forEach(n=>n.classList.toggle("on",n.dataset.tab===we[a.name]));try{let n=await p[a.name](a);if(t!==M)return;let u=document.activeElement?.id,r=document.activeElement?.selectionStart;if(B.innerHTML=n,u==="find-q"){let v=document.getElementById("find-q");v?.focus(),v&&r!=null&&v.setSelectionRange(r,r)}a.name==="settings"&&(document.getElementById("s-sound").value=d.sound,document.getElementById("s-sort").value=d.sort),e||window.scrollTo(0,0)}catch(n){console.error(n),t===M&&(B.innerHTML='<p class="empty">Impossible de charger cet \xE9cran. V\xE9rifie ta connexion.</p><button class="btn" onclick="location.reload()">R\xE9essayer</button>')}}window.addEventListener("hashchange",()=>g());async function Se(){if("serviceWorker"in navigator){let t=!!navigator.serviceWorker.controller,a=!1;navigator.serviceWorker.addEventListener("controllerchange",()=>{t&&!a&&!q&&(a=!0,location.reload())}),navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(i=>{i.update().catch(()=>{}),document.addEventListener("visibilitychange",()=>{document.visibilityState==="visible"&&i.update().catch(()=>{})})}).catch(()=>{})}let e=location.hash.startsWith("#/join/");!location.hash||location.hash==="#/"?location.hash="#/splash":e&&!d.onboarded&&(d.onboarded=!0,L());try{await ue(),c.rpc("touch_my_alerts"),await C().catch(()=>{}),ve(),k().then(()=>{["alerts","settings"].includes(R.name)&&g(!0)})}catch(t){console.error(t),B.innerHTML='<p class="empty">Connexion impossible au service SAYE. R\xE9essaie dans un instant.</p><button class="btn" onclick="location.reload()">R\xE9essayer</button>';return}g()}Se();
+    </div>`,clearInterval(g.timer);let w=()=>{let _=Math.ceil((v-Date.now())/1e3),S=document.getElementById("q-left");if(!S)return clearInterval(g.timer);if(_<=0){g();return}S.textContent=`Encore ${_} seconde${_>1?"s":""} pour confirmer`};w(),g.timer=setInterval(w,500)}async function _e(e){let t=$.find(n=>n.id===e),{data:a,error:s}=await l.rpc("press_alert",{p_alert:e});if(s)return i(j(s));if(a.status==="cooldown")return i("D\xE9j\xE0 d\xE9clench\xE9e il y a moins de 60 s.");if(a.status==="forbidden")return i("Seul le cr\xE9ateur peut d\xE9clencher cette alerte.");if(a.status==="triggered"){$e(a,t),f();return}a.status==="pending"&&(Y[e]=Date.now(),le(t,{count:a.count,quorum:a.quorum,window_s:a.window_s,firstPseudo:d.pseudo}))}var F={start(){p.onboarded=!0,L(),E("#/home")},"pick-visibility"(e){A={visibility:e.dataset.v},E("#/create-form")},press(e){_e(e.dataset.id)},"open-share"(e){A.justCreated=!1,E(`#/share/${e.dataset.id}`)},"open-join"(e){E(`#/join/${e.dataset.id}`)},async join(e){let t=D(),{error:a}=await l.rpc("join_alert",{p_alert:e.dataset.id,p_code:e.dataset.code||null});if(a)return i(j(a));i("Tu seras pr\xE9venu !"),await t,await k(),E("#/alerts")},async"diag-notif"(){let e=document.getElementById("diag"),t=a=>{e.textContent+=`${a}
+`};e.textContent="";try{t(`Version ${ee} \xB7 permission : ${Notification.permission}`);let a=await navigator.serviceWorker.ready;t(`Service worker : ${a.active?"actif":"inactif"} \xB7 port\xE9e ${new URL(a.scope).pathname}`);let s=await a.pushManager.getSubscription();t(`Abonnement existant : ${s?"oui":"non"}`),s&&(await s.unsubscribe(),t("\u2192 supprim\xE9"));let n=async(w,_)=>{try{let S=await a.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:_});return t(`${w} : OK (${new URL(S.endpoint).host})`),S}catch(S){return t(`${w} : \xC9CHEC ${S.name} ${S.message}`),null}};if(await n("Cl\xE9 SAYE",z(P))){await k(),t(`Enregistrement serveur : ${b}`);return}let o=await crypto.subtle.generateKey({name:"ECDH",namedCurve:"P-256"},!0,["deriveBits"]),v=new Uint8Array(await crypto.subtle.exportKey("raw",o.publicKey)),h=await n("Cl\xE9 de test neuve",v);h&&await h.unsubscribe()}catch(a){t(`Erreur : ${a.name} ${a.message}`)}},async"fix-notif"(){let e=document.getElementById("notif-status");e&&(e.textContent="Inscription en cours\u2026"),await D(),await k(),e&&(e.textContent=b==="ok"?"Notifications actives sur cet appareil \u2713":b),b==="ok"&&i("Notifications activ\xE9es !")},async"alert-menu"(e){let t=$.find(u=>u.id===e.dataset.id);if(!t)return;let a=t.is_owner?`Supprimer l'alerte \xAB ${t.title} \xBB pour tout le monde ?`:`Quitter l'alerte \xAB ${t.title} \xBB ?`;if(!confirm(a))return;let s=t.is_owner?l.from("alerts").delete().eq("id",t.id):l.from("members").delete().eq("alert_id",t.id).eq("user_id",d.id),{error:n}=await s;if(n)return i(j(n));i(t.is_owner?"Alerte supprim\xE9e.":"Tu as quitt\xE9 cette alerte."),f()},async copy(e){try{await navigator.clipboard.writeText(e.dataset.url),i("Lien copi\xE9 !")}catch{prompt("Copie ce lien :",e.dataset.url)}},async"copy-signal"(e,t){t.preventDefault();try{await navigator.clipboard.writeText(e.dataset.url)}catch{}i("Lien copi\xE9 : colle-le dans Signal.")},async"native-share"(e){if(navigator.share)try{await navigator.share({title:"SAYE",text:e.dataset.text,url:e.dataset.url})}catch{}else F.copy(e)},async"share-app"(){let e=location.href.split("#")[0];if(navigator.share)try{await navigator.share({title:"SAYE",text:"SAYE : \xAB \xC7a y est \xBB, c'est maintenant !",url:e})}catch{}else try{await navigator.clipboard.writeText(e),i("Lien de l'application copi\xE9 !")}catch{prompt("Lien :",e)}},"stop-alarm"(){g()},"close-overlay"(){g(),f()},async"cancel-trigger"(e){let{data:t}=await l.rpc("cancel_trigger",{p_trigger:Number(e.dataset.id)});g(),i(t?"Alerte annul\xE9e.":"Trop tard pour annuler."),f()},async report(){x?.triggerId&&await l.rpc("report_trigger",{p_trigger:x.triggerId}),g(),i("Merci, signalement enregistr\xE9.")},"test-alarm"(){K({test:!0})},async"claim-pseudo"(e){e.disabled=!0;try{await R(document.getElementById("s-pseudo").value.trim(),document.getElementById("s-pass").value),i("Pseudo r\xE9serv\xE9 !"),f(!0)}catch(t){i(t.message,4e3),e.disabled=!1}},async"protect-pseudo"(e){e.disabled=!0;try{await R(d.pseudo,document.getElementById("s-pass").value),i("Pseudo prot\xE9g\xE9 !"),f(!0)}catch(t){i(t.message,4e3),e.disabled=!1}},async"change-pseudo"(e){let t=document.getElementById("s-pseudo").value.trim();if(confirm(`Changer ton pseudo en \xAB ${t} \xBB ? Plus de changement possible pendant 30 jours.`)){e.disabled=!0;try{await R(t),i("Pseudo chang\xE9."),f(!0)}catch(a){i(a.message,4e3),e.disabled=!1}}},async"login-pseudo"(e){let t=document.getElementById("l-pseudo").value.trim(),a=document.getElementById("l-pass").value;if(!t||!a)return i("Indique ton pseudo et ton mot de passe.");e.disabled=!0;let{data:s}=await l.rpc("pseudo_login_id",{p:t}),{error:n}=s?await l.auth.signInWithPassword({email:s,password:a}):{error:!0};if(n)return e.disabled=!1,i("Pseudo ou mot de passe incorrect.",3500);i("Connect\xE9 !"),setTimeout(()=>{location.hash="#/alerts",location.reload()},600)},"reset-prefs"(){confirm("Effacer tes pr\xE9f\xE9rences sur cet appareil ?")&&(p={...U,onboarded:!0},L(),f(),i("Pr\xE9f\xE9rences effac\xE9es."))},"ask-notif"(){xe()}};document.addEventListener("click",e=>{let t=e.target.closest("[data-back]");if(t){e.preventDefault();let s=t.dataset.back;s==="history"&&history.length>1?history.back():E(s==="history"?"#/home":s);return}let a=e.target.closest("[data-action]");a&&F[a.dataset.action]&&(a.tagName==="BUTTON"&&e.preventDefault(),F[a.dataset.action](a,e))});document.addEventListener("change",e=>{let t=e.target;t.dataset.pref&&(p[t.dataset.pref]=t.type==="checkbox"?t.checked:t.value,L(),t.dataset.pref==="sound"&&se(t.value)),t.id==="find-cat"&&(T.cat=t.value,f())});var Z;document.addEventListener("input",e=>{e.target.dataset.live&&fe(e.target,document.getElementById(e.target.dataset.live)),e.target.id==="find-q"&&(clearTimeout(Z),Z=setTimeout(()=>{T.q=e.target.value.trim(),f(!0)},350))});document.addEventListener("submit",async e=>{if(e.target.id!=="create-form")return;e.preventDefault();let t=new FormData(e.target),a=e.target.querySelector("button[type=submit]");a.disabled=!0;let s=D();try{let n=String(t.get("pseudo")||"").trim();n&&!d.pseudo&&await R(n,String(t.get("password")||""));let{data:u,error:o}=await l.from("alerts").insert({title:String(t.get("title")).trim(),category:t.get("category"),visibility:A.visibility,trigger_mode:t.get("trigger_mode"),invite_mode:t.get("invite_mode")}).select("id").single();if(o)throw o;A={justCreated:!0},E(`#/share/${u.id}`),s.then(k)}catch(n){i(n instanceof Error&&!n.code?n.message:j(n),4e3),a.disabled=!1}});function Ee(){l.channel("saye").on("postgres_changes",{event:"INSERT",schema:"public",table:"triggers"},async({new:e})=>{if(e.cancelled||e.triggered_by===d.id)return;await q();let t=$.find(a=>a.id===e.alert_id);t&&(document.visibilityState==="hidden"&&Ae(t,e),K({trigger:e,alert:t}),I.name==="alerts"&&f(!0))}).on("postgres_changes",{event:"UPDATE",schema:"public",table:"triggers"},({new:e})=>{e.cancelled&&x?.triggerId===e.id&&(g(),i("L'alerte a \xE9t\xE9 annul\xE9e par son auteur."))}).on("postgres_changes",{event:"INSERT",schema:"public",table:"presses"},({new:e})=>{e.user_id===d.id||x||ce(e.alert_id).then(ie)}).subscribe()}async function ce(e){await q();let t=$.find(u=>u.id===e);if(!t)return;let{data:a}=await l.from("presses").select("pseudo, created_at").eq("alert_id",e).order("created_at"),s=(a||[]).filter(u=>Date.now()-new Date(u.created_at).getTime()<3e4);if(!s.length)return i("Ce signalement est termin\xE9.");let n=Math.min(t.quorum,Math.max(t.members_count,1));le(t,{count:s.length,quorum:n,window_s:30,firstPseudo:s[0].pseudo,since:s[0].created_at})}async function Se(e){let{data:t}=await l.from("triggers").select("*").eq("id",e).maybeSingle();if(!t)return;if(t.cancelled)return i("Cette alerte a \xE9t\xE9 annul\xE9e par son auteur.");if(Date.now()-new Date(t.created_at).getTime()>10*60*1e3)return;await q();let a=$.find(s=>s.id===t.alert_id);a&&K({trigger:t,alert:a})}function z(e){let t=atob(e.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((e.length+3)%4));return Uint8Array.from(t,a=>a.charCodeAt(0))}var b="";async function k(){if(!("serviceWorker"in navigator)||!("PushManager"in window))return b="Ce navigateur ne g\xE8re pas les notifications push.";if(!("Notification"in window))return b="Notifications indisponibles sur ce navigateur.";if(Notification.permission==="denied")return b="Notifications bloqu\xE9es dans le navigateur.";if(Notification.permission!=="granted")return b="Notifications pas encore autoris\xE9es.";let e=t=>{let a=t.toJSON();return l.from("push_subscriptions").upsert({endpoint:a.endpoint,user_id:d.id,p256dh:a.keys.p256dh,auth:a.keys.auth})};try{let t=await navigator.serviceWorker.ready,a=await t.pushManager.getSubscription();a||(a=await t.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:z(P)}));let{error:s}=await e(a);if(s&&(await a.unsubscribe(),a=await t.pushManager.subscribe({userVisibleOnly:!0,applicationServerKey:z(P)}),{error:s}=await e(a)),s)throw new Error(`enregistrement : ${s.message}`);return b="ok"}catch(t){return console.warn("push",t),b=`\xC9chec de l'inscription : ${t?.name||""} ${t?.message||t}`.trim()}}function D(){return!("Notification"in window)||Notification.permission!=="default"?Promise.resolve(Notification?.permission):Notification.requestPermission()}async function Ae(e,t){if(!("Notification"in window)||Notification.permission!=="granted")return;let a=await navigator.serviceWorker?.getRegistration(),s={body:`D\xE9clench\xE9e par ${t.pseudo||"un membre"}`,icon:"icons/icon-192.png",badge:"icons/icon-192.png",tag:`saye-${t.id}`,renotify:!0,vibrate:[400,150,400],data:{url:"#/alerts"}};a?a.showNotification(`ALERTE ! ${e.title}`,s):new Notification(`ALERTE ! ${e.title}`,s)}async function xe(){await D(),await k(),I.name==="alerts"&&f(!0)}var Ce={alarm:"alerts",quorum:"alerts",alerts:"alerts",find:"find",create:"create","create-form":"create",settings:"settings",legal:"settings",home:null,share:"alerts",join:"find"},I={name:"splash"},B=0;function Te(){let[e,t]=(location.hash.replace(/^#\/?/,"")||"splash").split("?"),[a,s]=e.split("/");return{name:m[a]?a:"home",id:s,query:new URLSearchParams(t||"")}}async function f(e=!1){let t=++B;I=Te();let a=I,s=!["splash","intro"].includes(a.name);Q.hidden=!s,document.body.classList.toggle("no-tabbar",!s),Q.querySelectorAll("a").forEach(n=>n.classList.toggle("on",n.dataset.tab===Ce[a.name]));try{let n=await m[a.name](a);if(t!==B)return;let u=document.activeElement?.id,o=document.activeElement?.selectionStart;if(O.innerHTML=n,u==="find-q"){let v=document.getElementById("find-q");v?.focus(),v&&o!=null&&v.setSelectionRange(o,o)}a.name==="settings"&&(document.getElementById("s-sound").value=p.sound,document.getElementById("s-sort").value=p.sort),e||window.scrollTo(0,0)}catch(n){console.error(n),t===B&&(O.innerHTML='<p class="empty">Impossible de charger cet \xE9cran. V\xE9rifie ta connexion.</p><button class="btn" onclick="location.reload()">R\xE9essayer</button>')}}window.addEventListener("hashchange",()=>f());async function ke(){if("serviceWorker"in navigator){let t=!!navigator.serviceWorker.controller,a=!1;navigator.serviceWorker.addEventListener("controllerchange",()=>{t&&!a&&!x&&(a=!0,location.reload())}),navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(s=>{s.update().catch(()=>{}),document.addEventListener("visibilitychange",()=>{document.visibilityState==="visible"&&s.update().catch(()=>{})})}).catch(()=>{})}let e=location.hash.startsWith("#/join/");!location.hash||location.hash==="#/"?location.hash="#/splash":e&&!p.onboarded&&(p.onboarded=!0,L());try{await me(),l.rpc("touch_my_alerts"),await q().catch(()=>{}),Ee(),k().then(()=>{["alerts","settings"].includes(I.name)&&f(!0)})}catch(t){console.error(t),O.innerHTML='<p class="empty">Connexion impossible au service SAYE. R\xE9essaie dans un instant.</p><button class="btn" onclick="location.reload()">R\xE9essayer</button>';return}f()}ke();
